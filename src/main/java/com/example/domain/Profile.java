@@ -1,41 +1,30 @@
 package com.example.domain;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
-/*
- * 1. @OneToOne
- * 2. @OneToMany
- * 3. @ManyToOne
- * 4. @ManyToMany
- */
 @Entity
-@Table(name="tbl_dept")
+@Table(name="tbl_profile")
 @Data
-@ToString(exclude={"emps"})
-public class MyDept {
-	
+@AllArgsConstructor
+@NoArgsConstructor
+public class Profile {
+
 	@Id
 	@TableGenerator(name="idGen", table="id_gen", 
 					  pkColumnName="seq_name",
 					  valueColumnName="nextval",
-					  allocationSize=10, initialValue=100)
+					  allocationSize=100, initialValue=1000)
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="idGen")
-	Integer deptno;
-	String dname;
-	String loc;
-	
-	@OneToMany(mappedBy="dept", fetch=FetchType.LAZY)
-	List<MyEmp> emps;
+	private Long fn;
+	private String fname;
+	private boolean curr;
 }
